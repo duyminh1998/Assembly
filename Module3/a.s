@@ -14,4 +14,4 @@ ADD sp, sp, # 4
 MOV r15, r14
 
 .data
-hw: .asciz "Hello world\n"
+hw: .asciz "Hello World\n"
