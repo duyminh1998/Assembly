@@ -1,4 +1,4 @@
-all:	a hello readInt age readFloat
+all:	a hello readInt age readFloat quotes
 a:	a.s
 	gcc a.s -g -o a
 	./a
@@ -17,3 +17,6 @@ age: age.s
 
 readFloat: readFloat.s
 	gcc readFloat.s -g -o readFloat
+
+quotes: quotes.s
+	gcc quotes.s -g -o quotes
