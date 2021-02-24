@@ -24,17 +24,13 @@ main:
 # Get the two values divide them, storing the
 # result in r0
     ldr r0, =num1
-    vldr s0,[r0, #0]
+    ldr r0,[r0, #0]
     ldr r1,=num2
-    vldr s1,[r1, #0]
-    # vldr s0, [r0]
-    # vldr s1, [r1]
-    vdiv.F32 s2, s0, s1 
+    ldr r1,[r1, #0]
+    bl __aeabi_idiv
 
 # Printing The Message
-    # vldr s0, [r0]
-    vcvt.F64.F32 d4, s2
-    vmov r1, r2, d4
+    mov r1, r0
     ldr r0, =format1
     bl  printf
 
@@ -44,9 +40,7 @@ main:
     mov pc, lr
 
 .data
-num1: .word 0
-num2: .word 0
-format1: .asciz "The number is %f\n"
+format1: .asciz "The number is %d\n"
 prompt1:
     .asciz "Enter A value for x: \n"
 prompt2:
@@ -54,3 +48,5 @@ prompt2:
 
 input: .asciz "%d"
 readInt: .asciz "%d"
+num1: .word 0
+num2: .word 0
