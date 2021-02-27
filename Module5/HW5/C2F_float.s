@@ -14,21 +14,28 @@ main:
 	LDR r1, =num1
 	BL scanf
 
-	# we first compute 5 x C x 9 + 32 x 25
+	# we compute C*(9/5) as (C*9*5)/25
 	LDR r0, =num1
 	LDR r0, [r0, #0]
 	MOV r1, #45
 	MUL r4, r0, r1
-	MOV r3, #800
-	ADD r0, r4, r3
+	LDR r2, =num2
+	STR r4, [r2, #0]
+	LDR r4, =num2 
+	VLDR s1, [r4]
+	LDR r0, =num3
+	VLDR s0, [r0]
+	VDIV.F32 s2, s1, s0
 
-	# finally, divide by 25
-	MOV r1, #25
-	BL __aeabi_idiv
+	# Add 32
+	#MOV r1, #32
+	#VLDR s1, [r1, #0]
+	#VADD.F32 s2, s2, s1
 
 	# Print the result
-	MOV r1, r0
 	LDR r0, =output
+	VCVT.F64.F32 d4, s2
+	VMOV r1, r2, d4
 	BL printf
 
 	MOV r0, #0
@@ -37,6 +44,8 @@ main:
 	MOV pc, lr
 .data
 	num1: .word 0
+	num2: .word 0
+	num3: .word 25
 	prompt: .asciz "Please enter a temperature in degrees C: "
 	input: .asciz "%d"
-	output: .asciz "\n Your temperature in degrees F is %d \n"
+	output: .asciz "\n Your temperature in degrees F is %f \n"

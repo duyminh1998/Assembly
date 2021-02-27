@@ -1,6 +1,9 @@
-all: C2F negate ft2in mulByShift swap
+all: C2F F2C negate ft2in mulByShift swap
 
 C2F: C2F.s
+	gcc $@.s -g -o $@
+
+F2C: F2C.s
 	gcc $@.s -g -o $@
 
 negate: negate.s
