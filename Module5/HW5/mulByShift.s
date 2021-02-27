@@ -14,12 +14,12 @@ main:
 	LDR r1, =num1
 	BL scanf
 
-	# use mvn to flip the bits
+	# multiplying by 10 is adding a 3 shift and a one shift
 	LDR r1, =num1
 	LDR r1, [r1, #0]
-	MVN r1, r1
-	# add one to the inverted bits to get its two complement's form
-	ADD r1, r1, #1
+	LSL r2, r1, #1
+	LSL r3, r1, #3
+	ADD r1, r2, r3
 
 	# print the result
 	LDR r0, =output
@@ -30,7 +30,7 @@ main:
 	ADD sp, sp, #4
 	MOV pc, lr
 .data
-	prompt: .asciz "Please enter a number to negate: "
+	prompt: .asciz "Please enter a number to multiply by 10: "
 	input: .asciz "%d"
 	num1: .word 0
-	output: .asciz "Your negated number is %d \n"
+	output: .asciz "Ten times your number is %d \n"
