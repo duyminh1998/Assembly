@@ -15,6 +15,7 @@ main:
 
 	# store value of r0 into r1
     	EOR r1, r1, r0
+	EOR r0, r0, r1
 
 	# return to the OS
     	LDR lr, [sp, #0]
