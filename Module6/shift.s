@@ -12,7 +12,8 @@ main:
 #mvn r0, #0b100010
 #mov r0, #0b1001, 16
 #mvn r0, #0b01001010
-mov r0, #-260
+#mov r0, #-260
+mvn r0, #0b01000010, 30
 ldr r2, =num1
 str r0, [r2]
 ldr r1, =num1
