@@ -10,7 +10,7 @@ Ft2Inches: Ft2Inches.o $(MYLIBS)
 	$(CC) $@.o $(MYLIBS) -g -o $@
 
 .s.o:
-	$(CC) $(@:.o*.s) -g -c -o $@
+	$(CC) $(@:.o=.s) -g -c -o $@
 
 clean:
 	rm *.o
